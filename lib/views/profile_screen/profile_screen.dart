@@ -43,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
                   
                   () {
                     controller.nameController.text = data['name'];
-                    controller.passController.text = data['password'];     
+                   // controller.passController.text = data['password'];     
                     Get.to(()=>EditProfileScreen(data: data));}),),
 
           /// user details sections
@@ -83,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-          10.heightBox,
+          2.heightBox,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

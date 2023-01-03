@@ -1,7 +1,7 @@
 {
     "categories":[
         {
-            "name": "Woman Dress", 
+            "name": "Women Dress", 
             "subcategory" : [
                 "Weding & Event",
                 "Tops & Sets",
@@ -9,7 +9,7 @@
             ]
         },
         {
-                "name":"Men Clothing & Fashion",
+                "name":"Man Clothing & Fashion",
                 "subcategory":[
                     "Outwear & Jacket",
                     "Formal Dress",
@@ -41,7 +41,7 @@
     ]
 },
 {
-    "name":"Toys",
+    "name":"Sports",
     "subcategory":[
         "Cyclin",
         "Sneakers",

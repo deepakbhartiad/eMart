@@ -3,6 +3,7 @@ import 'package:history_app/consts/consts.dart';
 import 'package:history_app/consts/list.dart';
 import 'package:history_app/widgets_common/bg_widget.dart';
 
+import '../../controllers/product_controller.dart';
 import 'categories_details.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -10,6 +11,11 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+var controller = Get.put(ProductController());
+
+
+
     return bgWidget(Scaffold(
       appBar: AppBar(
           elevation: 0, title: "Categories".text.fontFamily(bold).white.make()),
@@ -28,7 +34,7 @@ class CategoryScreen extends StatelessWidget {
                 children: [
                   Image.asset(
                     categoriesImages[index],
-                    height: 120,
+                    height: 130,
                     width: 200,
                     fit: BoxFit.cover,
                   ),
@@ -47,6 +53,7 @@ class CategoryScreen extends StatelessWidget {
                   .outerShadowSm
                   .make()
                   .onTap(() {
+                    controller.getSubCtegories(categoriesList[index]);
                 Get.to(() => CategoryDetails(
                       title: categoriesList[index],
                     ));

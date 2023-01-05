@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:history_app/consts/consts.dart';
 import 'package:history_app/controllers/home_controller.dart';
 import 'package:history_app/views/home_screen/home_screen.dart';
+import 'package:history_app/widgets_common/exit_dialog.dart';
 
 import '../cart_screen/cart_screen.dart';
 import '../category_screen/category_screen.dart';
@@ -51,27 +52,35 @@ class Home extends StatelessWidget {
       const ProfileScreen(),
     ];
 
-    return Scaffold(
-      body: Column(
-        children: [
-          Obx(
-            () => Expanded(
-              child: navBody.elementAt(controller.currentNavIndex.value),
+    return WillPopScope(
+      // SHOW DIALOG TO EXIT IN HO,E SCREEN
+      onWillPop:() async {
+
+        showDialog(barrierDismissible: false ,context: context, builder: (context)=>exitDialog(context));
+        return false;
+      },
+      child: Scaffold(
+        body: Column(
+          children: [
+            Obx(
+              () => Expanded(
+                child: navBody.elementAt(controller.currentNavIndex.value),
+              ),
             ),
+          ],
+        ),
+        bottomNavigationBar: Obx(
+          () => BottomNavigationBar(
+            currentIndex: controller.currentNavIndex.value,
+            selectedItemColor: redColor,
+            selectedLabelStyle: TextStyle(fontFamily: semibold),
+            backgroundColor: whiteColor,
+            type: BottomNavigationBarType.fixed,
+            items: navbarItems,
+            onTap: (Value) {
+              controller.currentNavIndex.value = Value;
+            },
           ),
-        ],
-      ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controller.currentNavIndex.value,
-          selectedItemColor: redColor,
-          selectedLabelStyle: TextStyle(fontFamily: semibold),
-          backgroundColor: whiteColor,
-          type: BottomNavigationBarType.fixed,
-          items: navbarItems,
-          onTap: (Value) {
-            controller.currentNavIndex.value = Value;
-          },
         ),
       ),
     );

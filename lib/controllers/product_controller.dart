@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:history_app/consts/consts.dart';
 import 'package:history_app/models/category_model.dart';
 
 class ProductController extends GetxController{
@@ -52,5 +53,29 @@ culculateTotalPrice(price){
   totalPrice.value = price * quantity.value;
 
 }
+// to add new collectin firebase store and add this data in your phone
+adToCart({title,img,seller,color,qty,tprice,context})async{
+  await firestore.collection(cartCollection).doc().set({
+'title':title,
+'img':img,
+'seller':seller,
+'color':color,
+'qty':qty,
+'tprice':tprice,
+'added_by': currentUser!.uid
+  }).catchError((error){
+    VxToast.show(context, msg: error.toString());
+  });
+
+}
+
+// reset price values in item cart
+resetValue(){
+  totalPrice.value = 0;
+  quantity.value = 0;
+  colorIndex.value = 0;
+}
+
+
 
 }

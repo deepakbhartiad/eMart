@@ -4,7 +4,6 @@ import 'package:history_app/consts/consts.dart';
 import 'package:history_app/servicess/firestore_servicess.dart';
 import 'package:history_app/views/category_screen/items_dtails.dart';
 import 'package:history_app/widgets_common/bg_widget.dart';
-
 import '../../controllers/product_controller.dart';
 import '../../widgets_common/loading_indicator.dart';
 

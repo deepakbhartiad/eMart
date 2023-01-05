@@ -1,5 +1,4 @@
 import 'package:history_app/consts/consts.dart';
-import 'package:history_app/models/category_model.dart';
 // get users data 
 class FirestoreServices{
   static getUser(uid){
@@ -15,5 +14,15 @@ static getProduct(category){
   
 }
 
+
+// get cart or create stream
+static getCart(uid){
+  return firestore.collection(cartCollection).where('added_by',isEqualTo: uid).snapshots();
+}
+
+// delete document
+static deleteDocument(docId){
+  return firestore.collection(cartCollection).doc(docId).delete();
+}
 
 }

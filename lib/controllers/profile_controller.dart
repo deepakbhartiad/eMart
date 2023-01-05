@@ -1,7 +1,4 @@
-
-
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -12,12 +9,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
 class ProfileController extends GetxController{
-var profileImgPath = "".obs;
-var profileImageLink = "";
+var profileImgPath = ''.obs;
+var profileImageLink = '';
 //loading complete variablr to ask you
 var isloading = false.obs ;
 
 //text field
+// var nameController = TextEditingController();
 var nameController = TextEditingController();
 var oldpassController = TextEditingController();
 var newpassController = TextEditingController();
@@ -25,7 +23,7 @@ var newpassController = TextEditingController();
 
 changeImage(context)async{
   try{
-     final img = await ImagePicker().pickImage(source: ImageSource.gallery,imageQuality: 70);
+     final img = await ImagePicker().pickImage(source: ImageSource.gallery,imageQuality: 60);
   if(img == null) return;
   profileImgPath.value = img.path;
   } on PlatformException catch(e){

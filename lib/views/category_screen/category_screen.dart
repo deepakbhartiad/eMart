@@ -18,6 +18,7 @@ var controller = Get.put(ProductController());
 
     return bgWidget(Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
           elevation: 0, title: "Categories".text.fontFamily(bold).white.make()),
       body: Container(
         padding: EdgeInsets.all(12),

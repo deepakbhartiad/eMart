@@ -10,12 +10,12 @@ import 'package:history_app/widgets_common/our_button.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final dynamic data;
-  const EditProfileScreen({super.key, this.data});
+  const EditProfileScreen({super.key,this.data });
 
   @override
   Widget build(BuildContext context) {
     var controller =   Get.find<ProfileController>();
-   
+
 
     return bgWidget(Scaffold(
       resizeToAvoidBottomInset: false,
@@ -30,8 +30,9 @@ class EditProfileScreen extends StatelessWidget {
        
        
        // if data image url and data controller path is empty 
-       data['imageUrl'] == '' &&  controller.profileImgPath.isEmpty
-       ?  Image.asset(
+      data['imageUrl'] == '' &&  controller.profileImgPath.isEmpty
+       ?
+         Image.asset(
                     imgProfile2,
                     width: 100,
                     fit: BoxFit.cover,
@@ -40,11 +41,11 @@ class EditProfileScreen extends StatelessWidget {
                   :
                   data['imageUrl'] != '' && controller.profileImgPath.isEmpty
                   ?
-                   Image.network(data['imageUrl'] ,  width: 100,fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make()
+                   Image.network(data['imageUrl'] ,  width: 70,fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make()
                    // if both are empty to showing this 
                    :
               Image.file(File(controller.profileImgPath.value),
-              width: 100,fit: BoxFit.cover,
+              width: 60,fit: BoxFit.cover,
        
               ).box.roundedFull.clip(Clip.antiAlias).make(),
        
@@ -55,6 +56,7 @@ class EditProfileScreen extends StatelessWidget {
                   ourButton(
                     color: redColor,onPress: (){
                       controller.changeImage(context);
+                      
                     
                     },textColor: whiteColor,title: "Change"
                   ),
@@ -90,6 +92,15 @@ class EditProfileScreen extends StatelessWidget {
                       width: context.screenWidth -60,
                       child: ourButton(
                       color: redColor,onPress: ()async{
+                        // controller.isloading(true);
+                        // await controller.uplodProfileImage();
+                        // await controller.updateProfile(
+                        //   imgUrl:  controller.profileImageLink,
+                        //   name: controller.nameController.text,
+                        //   password: controller.newpassController.text
+                        // );
+                        // VxToast.show(context, msg: "Updated");
+
 
 
 

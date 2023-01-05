@@ -7,9 +7,10 @@ import 'package:history_app/controllers/profile_controller.dart';
 import 'package:history_app/servicess/firestore_servicess.dart';
 import 'package:history_app/views/auth_screen/login_screen.dart';
 import 'package:history_app/widgets_common/bg_widget.dart';
+import 'package:history_app/widgets_common/loading_indicator.dart';
 
 import 'components/details_cart.dart';
-import 'edit_orifile_screen.dart';
+import 'edit_proifile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -19,15 +20,13 @@ class ProfileScreen extends StatelessWidget {
     var controller = Get.put(ProfileController());
     return bgWidget(Scaffold(
       body: StreamBuilder(
-        stream:  FirestoreServices.getUser(currentUser!.uid),
+        stream: FirestoreServices.getUser(currentUser!.uid),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
           if(!snapshot.hasData){
-            return Center(child:
-             CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(redColor)),);
+            return Center(child: loadingIndicator(),);
           }else{
             var data = snapshot.data!.docs[0];
-
-            return SafeArea(
+            return  SafeArea(
           child: Column(
         children: [
           /// edit profile button
@@ -42,9 +41,10 @@ class ProfileScreen extends StatelessWidget {
                 )).onTap(
                   
                   () {
-                    controller.nameController.text = data['name'];
-                   // controller.passController.text = data['password'];     
-                    Get.to(()=>EditProfileScreen(data: data));}),),
+                   
+                   // controller.nameController.text = data['name'];
+                    Get.to(()=>EditProfileScreen(data: data));
+                    }),),
 
           /// user details sections
           Padding(
@@ -52,15 +52,16 @@ class ProfileScreen extends StatelessWidget {
             child: Row(
               children: [
 
-                data['imageUrl'] == ''?
+               data['imageUrl'] == ''?
                 Image.asset(
                   imgProfile2,
-                  width: 100,
+                  width: 60,
                   fit: BoxFit.cover,
-                ).box.roundedFull.clip(Clip.antiAlias).make():
+                ).box.roundedFull.clip(Clip.antiAlias).make()
+                :
                 Image.network(
                   data['imageUrl'],
-                  width: 100,
+                  width: 60,
                   fit: BoxFit.cover,
                 ).box.roundedFull.clip(Clip.antiAlias).make(),
                 10.widthBox,
@@ -88,15 +89,18 @@ class ProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               dtailsCart(
-                  count: data['cart_count'],
+                  count: 
+                  data['cart_count'],
                   title: "your cart",
                   width: context.screenWidth / 3.4),
               dtailsCart(
-                  count: data['wishlist_count'],
+                  count:
+                   data['wishlist_count'],
                   title: "your whishlist",
                   width: context.screenWidth / 3.4),
               dtailsCart(
-                  count: data['order_count'],
+                  count:
+                  data['order_count'],
                   title: "your order",
                   width: context.screenWidth / 3.4),
             ],
@@ -136,12 +140,9 @@ class ProfileScreen extends StatelessWidget {
               .make()
         ],
       ));
-
           }
-         
         },
-     
-      )
+        )
     ));
   }
 }
